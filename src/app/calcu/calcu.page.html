@@ -1,0 +1,192 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Calculadora Científica</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  
+  <ion-card>
+    <ion-card-content>
+      
+      <!-- Display -->
+      <ion-item>
+        <ion-input 
+          [value]="display" 
+          readonly 
+          class="display-text ion-text-end"
+          placeholder="0">
+        </ion-input>
+      </ion-item>
+
+      <!-- Calculadora Científica Completa -->
+      <ion-grid class="calculator-grid">
+        <!-- Fila 1 - Funciones trigonométricas -->
+        <ion-row>
+          <ion-col>
+            <ion-button expand="block" color="tertiary" (click)="scientificFunction('sin')">sin</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button expand="block" color="tertiary" (click)="scientificFunction('cos')">cos</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button expand="block" color="tertiary" (click)="scientificFunction('tan')">tan</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button expand="block" color="tertiary" (click)="scientificFunction('log')">log</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button expand="block" color="tertiary" (click)="scientificFunction('ln')">ln</ion-button>
+          </ion-col>
+        </ion-row>
+
+        <!-- Fila 2 - Potencias y raíces -->
+        <ion-row>
+          <ion-col>
+            <ion-button expand="block" color="secondary" (click)="scientificFunction('square')">x²</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button expand="block" color="secondary" (click)="scientificFunction('cube')">x³</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button expand="block" color="secondary" (click)="setOperator('^')">x^y</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button expand="block" color="secondary" (click)="scientificFunction('sqrt')">√</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button expand="block" color="secondary" (click)="scientificFunction('cbrt')">∛</ion-button>
+          </ion-col>
+        </ion-row>
+
+        <!-- Fila 3 - Constantes y funciones especiales -->
+        <ion-row>
+          <ion-col>
+            <ion-button expand="block" color="success" (click)="scientificFunction('pi')">π</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button expand="block" color="success" (click)="scientificFunction('e')">e</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button expand="block" color="success" (click)="scientificFunction('exp')">eˣ</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button expand="block" color="success" (click)="scientificFunction('power10')">10ˣ</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button expand="block" color="success" (click)="scientificFunction('factorial')">x!</ion-button>
+          </ion-col>
+        </ion-row>
+
+        <!-- Fila 4 - Funciones matemáticas -->
+        <ion-row>
+          <ion-col>
+            <ion-button expand="block" color="warning" (click)="scientificFunction('abs')">|x|</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button expand="block" color="warning" (click)="scientificFunction('floor')">floor</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button expand="block" color="warning" (click)="scientificFunction('ceil')">ceil</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button expand="block" color="warning" (click)="scientificFunction('round')">round</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button expand="block" color="medium" (click)="toggleSign()">±</ion-button>
+          </ion-col>
+        </ion-row>
+
+        <!-- Fila 5 - Control y operaciones básicas -->
+        <ion-row>
+          <ion-col>
+            <ion-button expand="block" color="danger" (click)="clear()">C</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button expand="block" color="medium" (click)="backspace()">⌫</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button expand="block" color="medium" (click)="percentage()">%</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button expand="block" color="danger" (click)="setOperator('/')">/</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button expand="block" color="danger" (click)="setOperator('*')">×</ion-button>
+          </ion-col>
+        </ion-row>
+
+        <!-- Fila 6 - Números -->
+        <ion-row>
+          <ion-col>
+            <ion-button expand="block" (click)="addNumber('7')">7</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button expand="block" (click)="addNumber('8')">8</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button expand="block" (click)="addNumber('9')">9</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button expand="block" color="danger" (click)="setOperator('-')">-</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button expand="block" color="success" (click)="calculate()">=</ion-button>
+          </ion-col>
+        </ion-row>
+
+        <!-- Fila 7 - Números -->
+        <ion-row>
+          <ion-col>
+            <ion-button expand="block" (click)="addNumber('4')">4</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button expand="block" (click)="addNumber('5')">5</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button expand="block" (click)="addNumber('6')">6</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button expand="block" color="danger" (click)="setOperator('+')">+</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button expand="block" color="medium" (click)="addDecimal()">.</ion-button>
+          </ion-col>
+        </ion-row>
+
+        <!-- Fila 8 - Números -->
+        <ion-row>
+          <ion-col>
+            <ion-button expand="block" (click)="addNumber('1')">1</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button expand="block" (click)="addNumber('2')">2</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button expand="block" (click)="addNumber('3')">3</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button expand="block" (click)="addNumber('0')" size="large">0</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button expand="block" color="primary" (click)="clear()">AC</ion-button>
+          </ion-col>
+        </ion-row>
+
+      </ion-grid>
+
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Botón para regresar al login -->
+  <ion-button 
+    expand="block" 
+    color="medium" 
+    fill="outline" 
+    class="ion-margin-top"
+    routerLink="/login"
+    (click)="goToLogin()">
+    Regresar al Login
+  </ion-button>
+
+</ion-content>

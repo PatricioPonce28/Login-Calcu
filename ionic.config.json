@@ -1,0 +1,7 @@
+{
+  "name": "login-calcu",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
